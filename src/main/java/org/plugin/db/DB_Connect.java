@@ -3,6 +3,7 @@ package org.plugin.db;
 import org.plugin.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DB_Connect {
@@ -12,11 +13,49 @@ public class DB_Connect {
     private final String jdbc = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/minecraft";
     private final String uid = "root";
-    private final String pwd = "???";
+    private final String pwd = "1234";
 
     Connection con;
     Statement smt;
     ResultSet rs;
+
+    public ArrayList<User> money_winner(){
+        ArrayList<User> user_winner_list = new ArrayList<>();
+
+        try {
+            rs = smt.executeQuery("select user_name,user_money, RANK() OVER (ORDER BY user_money DESC) 순위 from user");
+            int count = 0;
+            while(rs.next()){
+                if(count == 10){
+                    break;
+                }
+                count++;
+                User user = new User();
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_money(rs.getInt("user_money"));
+                user_winner_list.add(user);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        return user_winner_list;
+
+    }
+
+    public boolean check_userName(String name){
+
+        try {
+            rs = smt.executeQuery("select * from user where user_name = '"+name+"'");
+            if(rs.next()){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        return false;
+    }
 
     public int select_nameMoney(String name){
 
