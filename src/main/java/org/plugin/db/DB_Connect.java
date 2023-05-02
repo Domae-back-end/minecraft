@@ -12,7 +12,7 @@ public class DB_Connect {
     private final String jdbc = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/minecraft";
     private final String uid = "root";
-    private final String pwd = "k1716k";
+    private final String pwd = "???";
 
     Connection con;
     Statement smt;
