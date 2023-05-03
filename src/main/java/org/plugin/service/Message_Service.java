@@ -14,19 +14,19 @@ public class Message_Service {
     public void first_message(String name){
         message.setPlayer(name);
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(message.getFirst_info());
+            p.sendMessage(message.getInfo()+message.getPlayer()+message.getFirst_info());
         }
     }
     public void join_message(String name){
         message.setPlayer(name);
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(message.getHello_info());
+            p.sendMessage(message.getInfo()+message.getPlayer()+message.getHello_info());
         }
     }
     public void leave_message(String name){
         message.setPlayer(name);
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(message.getLeave_info());
+            p.sendMessage(message.getInfo()+message.getPlayer()+message.getLeave_info());
         }
     }
 

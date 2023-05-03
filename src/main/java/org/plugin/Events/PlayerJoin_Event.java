@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.plugin.db.DB_Connect;
 import org.plugin.model.User;
 import org.plugin.service.Message_Service;
+import org.plugin.service.UserLeave_Service;
 
 public class PlayerJoin_Event implements Listener {
 
@@ -33,6 +34,7 @@ public class PlayerJoin_Event implements Listener {
     @EventHandler
     public void leave_player(PlayerQuitEvent e){
         Player p = e.getPlayer();
+        new UserLeave_Service().user_leave(p.getUniqueId()+"");
         message.leave_message(p.getName());
     }
 

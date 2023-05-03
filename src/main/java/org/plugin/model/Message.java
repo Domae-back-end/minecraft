@@ -7,9 +7,9 @@ import java.util.HashMap;
 public class Message {
 
     private String player="";
-    private String hello_info="[!]"+player+" 님 서버에 오신걸 환영합니다.";
-    private String first_info="[!]"+player+" 님 서버에 처음 오신걸 환영합니다.";
-    private String leave_info="[!]"+player+" 님 서버에 나가셨습니다.";
+    private String hello_info=" 님 서버에 오신걸 환영합니다.";
+    private String first_info=" 님 서버에 처음 오신걸 환영합니다.";
+    private String leave_info=" 님 서버에 나가셨습니다.";
 
     private String info="[!]";
 

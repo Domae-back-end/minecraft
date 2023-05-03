@@ -43,13 +43,14 @@ public class Money_Command implements CommandExecutor {
                         }
                     }
                 }else if(args[0].equals("설정")){
-                    if(money_service.check_userName(p.getName())){
+                    if(!(money_service.check_userName(args[1]))){
                         p.sendMessage(message.getInfo()+" 존재하지 않은 유저입니다.");
                         return false;
                     }
                     money_service.admin_chageMoney(args[1],Integer.parseInt(args[2]));
+                    p.sendMessage(message.getInfo()+" 해당 유저의 잔액을 "+args[2]+" 원으로 바꿨습니다.");
                 }else if(args[0].equals("빼기")){
-                    if(money_service.check_userName(p.getName())){
+                    if(!(money_service.check_userName(args[1]))){
                         p.sendMessage(message.getInfo()+" 존재하지 않은 유저입니다.");
                         return false;
                     }
@@ -68,7 +69,7 @@ public class Money_Command implements CommandExecutor {
                         }
                     }
                 }else if(args[0].equals("더하기")){
-                    if(money_service.check_userName(p.getName())){
+                    if(!(money_service.check_userName(args[1]))){
                         p.sendMessage(message.getInfo()+" 존재하지 않은 유저입니다.");
                         return false;
                     }
@@ -93,7 +94,7 @@ public class Money_Command implements CommandExecutor {
                         p.sendMessage(message.getInfo()+" 오류가 발생하여 관리자에게 문의 주세요.");
                     }
                 }else if(args[0].equals("보내기")){
-                    if(money_service.check_userName(p.getName())){
+                    if(!(money_service.check_userName(args[1]))){
                         p.sendMessage(message.getInfo()+" 존재하지 않은 유저입니다.");
                         return false;
                     }
@@ -104,12 +105,12 @@ public class Money_Command implements CommandExecutor {
                     }
                 }else if(args[0].equals("순위")){
                     ArrayList<User> user_list = money_service.user_winner();
-                    p.sendMessage("--------------------------------------------------------------");
+                    p.sendMessage("---------------------------------------");
                     for (int i = 0; i < user_list.size(); i++) {
                         String msg = "["+(i+1)+"] 순위 : "+user_list.get(i).getUser_name()+" 님 / 잔액 : "+user_list.get(i).getUser_money()+" 원";
                         p.sendMessage(msg);
                     }
-                    p.sendMessage("--------------------------------------------------------------");
+                    p.sendMessage("---------------------------------------");
                 }else{
                     p.sendMessage(message.getInfo()+" 잘못된 명령어입니다.");
                 }

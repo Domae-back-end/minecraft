@@ -2,3 +2,5 @@ name: test_plugin_code
 version: '1.0-SNAPSHOT'
 main: org.plugin.test_plugin_code.Test_plugin_code
 api-version: 1.19
+commands:
+  돈:
