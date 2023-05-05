@@ -4,3 +4,4 @@ main: org.plugin.test_plugin_code.Test_plugin_code
 api-version: 1.19
 commands:
   돈:
+  아이템:

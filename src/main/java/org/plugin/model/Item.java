@@ -1,6 +1,7 @@
 package org.plugin.model;
 
 
+import org.bukkit.Material;
 
 public class Item {
     private long item_pid;

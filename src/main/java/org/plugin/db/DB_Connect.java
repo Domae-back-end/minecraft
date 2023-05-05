@@ -1,5 +1,6 @@
 package org.plugin.db;
 
+import org.plugin.model.Item;
 import org.plugin.model.User;
 
 import java.sql.*;
@@ -12,8 +13,8 @@ public class DB_Connect {
 
     private final String jdbc = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/minecraft";
-    private final String uid = "1234";
-    private final String pwd = "1234";
+    private final String uid = "";
+    private final String pwd = "";
 
     Connection con;
     Statement smt;
@@ -206,6 +207,67 @@ public class DB_Connect {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ArrayList<Item> select_items(){
+        ArrayList<Item> item_list = new ArrayList<>();
+        try{
+            Class.forName(jdbc);
+            con = DriverManager.getConnection(url, uid, pwd);
+            smt = con.createStatement();
+            rs = smt.executeQuery("select * from item_list");
+            while (rs.next()){
+                Item item = new Item();
+                item.setItem_type(rs.getString("item_type"));
+                item.setItem_pid(rs.getLong("item_pid"));
+                item.setItem_name(rs.getString("item_name"));
+                item.setItem_info(rs.getString("item_info"));
+                item.setItem_make(rs.getString("item_make"));
+                item.setItem_createday(rs.getString("item_createday"));
+                item_list.add(item);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (smt != null) smt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return item_list;
+    }
+
+    public Item find_onItem(long item_pid){
+        Item item = new Item();
+
+        try{
+            Class.forName(jdbc);
+            con = DriverManager.getConnection(url, uid, pwd);
+            smt = con.createStatement();
+            rs = smt.executeQuery("select * from item_list where item_pid = "+item_pid+"");
+            if(rs.next()){
+                item.setItem_type(rs.getString("item_type"));
+                item.setItem_pid(rs.getLong("item_pid"));
+                item.setItem_name(rs.getString("item_name"));
+                item.setItem_info(rs.getString("item_info"));
+                item.setItem_make(rs.getString("item_make"));
+                item.setItem_createday(rs.getString("item_createday"));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (smt != null) smt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return item;
     }
 
     public static DB_Connect getInstance() {
