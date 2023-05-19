@@ -27,6 +27,7 @@ public class Money_Command implements CommandExecutor {
                 p.sendMessage(message.getInfo()+"/돈 설정 [닉네임] [설정금액] - 해당 유저의 잔액을 설정합니다.");
                 p.sendMessage(message.getInfo()+"/돈 빼기 [닉네임] [설정금액] - 해당 유저의 잔액을 뺍니다.");
                 p.sendMessage(message.getInfo()+"/돈 더하기 [닉네임] [설정금액] - 해당 유저의 잔액을 더합니다.");
+                p.sendMessage(message.getInfo()+"/돈 순위 - 현재 순위를 봅니다.");
             }else{
 
                 if(args[0].equals("확인")){
@@ -42,6 +43,14 @@ public class Money_Command implements CommandExecutor {
                             p.sendMessage(message.getInfo()+" 오류가 발생하여 관리자에게 문의 주세요.");
                         }
                     }
+                }else if(args[0].equals("순위")){
+                    ArrayList<User> user_list = money_service.user_winner();
+                    p.sendMessage("---------------------------------------");
+                    for (int i = 0; i < user_list.size(); i++) {
+                        String msg = "["+(i+1)+"] 순위 : "+user_list.get(i).getUser_name()+" 님 / 잔액 : "+user_list.get(i).getUser_money()+" 원";
+                        p.sendMessage(msg);
+                    }
+                    p.sendMessage("---------------------------------------");
                 }else if(args[0].equals("설정")){
                     if(!(money_service.check_userName(args[1]))){
                         p.sendMessage(message.getInfo()+" 존재하지 않은 유저입니다.");
